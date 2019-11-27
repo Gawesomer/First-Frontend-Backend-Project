@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+  br
+  p #[strong Name]: #{sourceCodeExploit.name}
+  p #[strong Category]: #{sourceCodeExploit.category}
+  p #[strong Description]: #{sourceCodeExploit.description}
+  p #[strong contractAddress]: #{sourceCodeExploit.contractAddress}
+  p #[strong sourceCode]: #{sourceCodeExploit.sourceCode.replace("\n", "br")}
+  p #[strong ABI]: #{sourceCodeExploit.ABI}
+  p #[strong compilerVersion]: #{sourceCodeExploit.compilerVersion}
+  p #[strong constructorArguments]: #{sourceCodeExploit.constructorArguments}

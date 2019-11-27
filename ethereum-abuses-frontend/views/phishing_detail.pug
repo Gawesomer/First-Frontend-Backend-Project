@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+  br
+  p #[strong Name]: #{phishing.name}
+  p #[strong Category]: #{phishing.category}
+  p #[strong Description]: #{phishing.description}
+  p #[strong accountAddress]: #{phishing.accountAddress}
+  p #[strong profit]: #{phishing.profit}
+  p #[strong URL]: #[a(href=phishing.URL) #{phishing.URL}]
+  p #[strong Source]: #[a(href=phishing.source) #{phishing.source}]
+  p #[strong blockChainTech]: #{phishing.blockChainTech}

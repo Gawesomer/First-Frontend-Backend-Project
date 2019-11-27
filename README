@@ -1,0 +1,127 @@
+Backend and frontend for a database of abuses of blockchain technology.
+
+Database populated using data from:
+    Etherscan   - https://etherscan.io/
+    Etherscamdb - https://etherscamdb.info/
+
+Contents:
+    - dump:     Dump of mongo database to be loaded
+    - Documentation:    Documentation to get setup the database and frontend
+    - ethereum-abuses-frontend: Frontend
+    - scripts:  Scripts I used to interact with database
+
+Getting setup:
+
+    - Install mongodb
+    - Load database from dump into mongo
+    - Install Node
+    - Reinstall frontend's dependencies
+    - Run frontend
+
+    (Further details in below)
+
+////////////////////////////////////////////////////////////////////////////////
+Mongodb installation
+////////////////////////////////////////////////////////////////////////////////
+
+Reference: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
+Installed MongoDB Community
+
+///Installation
+Import the public key used by the package management system:
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+
+Create a list file for MongoDB:
+    echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+
+Reload local package database:
+    sudo apt-get update
+
+Install the MongoDB packages:
+    sudo apt-get install mongodb-org
+
+///Installation post-conditions
+Directories created during installation:
+    - Data:     /var/lib/mongodb/
+    - Logs:     /var/log/mongodb/
+
+Configuration file:
+    /etc/mongodb.conf
+
+User created:
+    mongodb
+
+Group created:
+    mongodb
+
+///Running MongoDB
+
+Start MongoDB daemon:
+    sudo systemctl start mongod
+
+Begin using MongoDB :
+    mongo
+
+///Migrate database
+
+Once MongoDB has been installed the ethereumAbuses can be reloaded from the dump
+directory I've created. Simply run 'mongorestore' with no arguments with the
+dump in your current directory. That is;
+
+    $ mongorestore
+
+Reference:
+    https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/
+
+///Where to go from here
+
+Basic tutorial: https://flaviocopes.com/mongodb/
+
+
+////////////////////////////////////////////////////////////////////////////////
+Frontend setup
+////////////////////////////////////////////////////////////////////////////////
+
+Tutorial used:
+    https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Tutorial_local_library_website
+
+///Installing Node
+
+    $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - 
+    $ sudo apt-get install nodejs
+
+///Installing dependencies
+
+    $ cd ethereum-abuses-frontend
+    $ rm -rf node_modules/
+    $ npm install
+    $ npm audit fix     (If necessary)
+
+///Starting the frontend
+
+    $ cd ethereum-abuses-frontend
+    $ DEBUG=ethereum-abuses-frontend:* npm run devstart
+
+    Note: I run in within a detached TMUX session to run it in the background
+
+///Viewing frontend
+
+    Serviced on port 3000
+    Browse to localhost:3000
+
+///Architecture and maintenance
+
+    Web server - Node
+    Web framework - Express
+    Object Data Model - Mongoose
+    View engine - Pug
+
+    Model View Controller architecture
+
+    Files used are located in:
+
+        ethereum-abuses-frontend/views
+        ethereum-abuses-frontend/models
+        ethereum-abuses-frontend/controllers
+        ethereum-abuses-frontend/routes

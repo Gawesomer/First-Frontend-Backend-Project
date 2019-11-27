@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each other in other_list
+      li
+        a(href=other.url) #{other.name}
+        |  (#{other.category})
+
+    else
+      li There are no others.
